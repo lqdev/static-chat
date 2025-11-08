@@ -5,11 +5,7 @@
   },
   "routes": [
     {
-      "route": "/chat",
-      "rewrite": "/chat/index.html"
-    },
-    {
-      "route": "/chat/",
+      "route": "/chat/*",
       "rewrite": "/chat/index.html"
     }
   ],
