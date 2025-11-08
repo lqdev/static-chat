@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Chat - lqdev.me</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Share Link Section (shown when alone in room) -->
+  <div id="shareLink" class="share-section" style="display: none;">
+    <h2>Share this link to start chatting</h2>
+    <div class="link-container">
+      <input type="text" id="linkInput" readonly>
+      <button id="copyBtn">Copy Link</button>
+    </div>
+    <p class="waiting-message">Waiting for someone to join...</p>
+  </div>
+
+  <!-- Video Container -->
+  <div id="videoContainer" class="video-container">
+    <video id="localVideo" autoplay muted playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls" class="controls">
+    <button id="muteBtn" class="control-btn">
+      <span class="icon">🎤</span>
+      <span class="label">Mute</span>
+    </button>
+    <button id="videoBtn" class="control-btn">
+      <span class="icon">📹</span>
+      <span class="label">Stop Video</span>
+    </button>
+    <button id="hangupBtn" class="control-btn danger">
+      <span class="icon">📞</span>
+      <span class="label">Hang Up</span>
+    </button>
+  </div>
+
+  <!-- Status Messages -->
+  <div id="status" class="status-message" style="display: none;"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@latest/dist/browser/signalr.min.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

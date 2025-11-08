@@ -1,0 +1,13 @@
+# Azure Functions
+bin
+obj
+appsettings.json
+local.settings.json
+
+# Node
+node_modules
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
