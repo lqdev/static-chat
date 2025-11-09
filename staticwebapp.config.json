@@ -5,6 +5,12 @@
   },
   "routes": [
     {
+      "route": "/chat/*.{css,js}",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
       "route": "/chat/*",
       "rewrite": "/chat/index.html"
     }
