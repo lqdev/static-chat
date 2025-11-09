@@ -54,6 +54,9 @@ A self-hosted, browser-based video chat application for one-on-one video calls w
 2. **Create Azure SignalR Service**:
    - Create a SignalR Service resource in Azure Portal
    - Choose Free tier (20 concurrent connections, 20k messages/day)
+   - **IMPORTANT**: Set Service Mode to **"Serverless"** (Settings → Service Mode)
+     - This application uses Azure Functions and requires Serverless mode
+     - Default mode will cause connection errors
    - Copy the connection string
 
 3. **Deploy to Azure Static Web Apps**:
@@ -90,6 +93,8 @@ A self-hosted, browser-based video chat application for one-on-one video calls w
      }
    }
    ```
+   
+   **Note**: Ensure your Azure SignalR Service is in **Serverless** mode (see deployment instructions above).
 
 3. **Start the local server**:
    ```bash
@@ -135,6 +140,26 @@ A self-hosted, browser-based video chat application for one-on-one video calls w
 - **No Recording**: No built-in recording functionality
 - **NAT Traversal**: Some restrictive networks may require a TURN server (not included)
 - **No Mobile Apps**: Browser-only (responsive design works on mobile browsers)
+
+## Troubleshooting
+
+### SignalR Handshake Error: "Server returned handshake error"
+
+**Error Message**: 
+```
+Server returned handshake error: SignalR Service is now in 'Default' service mode. 
+Current mode works as a proxy that routes client traffic to the connected app servers. 
+However app servers are not connected.
+```
+
+**Solution**:
+1. Go to Azure Portal → Your SignalR Service resource
+2. Navigate to **Settings** → **Service Mode**
+3. Change from **"Default"** to **"Serverless"**
+4. Save the changes
+5. Wait a few seconds and refresh your application
+
+This error occurs when the SignalR Service is in Default mode, which expects a persistent server connection. Since this application uses Azure Functions (serverless architecture), the service must be in Serverless mode.
 
 ## Cost Considerations
 
