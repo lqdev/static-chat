@@ -84,6 +84,12 @@ async function setupSignalR() {
 
     // Handle incoming signals
     signalRConnection.on('signal', async (data) => {
+      // Ignore signals from ourselves
+      if (data.connectionId === signalRConnection.connectionId) {
+        console.log('Ignoring own signal:', data.type);
+        return;
+      }
+
       console.log('Received signal:', data.type);
 
       try {
@@ -101,7 +107,13 @@ async function setupSignalR() {
     });
 
     // Handle user joined
-    signalRConnection.on('userJoined', () => {
+    signalRConnection.on('userJoined', (data) => {
+      // Ignore our own join event
+      if (data.connectionId === signalRConnection.connectionId) {
+        console.log('Ignoring own join event');
+        return;
+      }
+
       console.log('User joined the room');
       hideShareLink();
       createPeerConnection();

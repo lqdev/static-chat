@@ -20,8 +20,7 @@ module.exports = async function (context, req) {
   context.bindings.signalRMessages = [{
     target: 'userJoined',
     arguments: [{ connectionId }],
-    groupName: roomId,
-    userId: connectionId
+    groupName: roomId
   }];
 
   context.res = {
