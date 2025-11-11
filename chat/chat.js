@@ -220,7 +220,8 @@ async function sendSignal(type, signal) {
       body: JSON.stringify({
         roomId: roomId,
         type: type,
-        signal: signal
+        signal: signal,
+        connectionId: signalRConnection.connectionId
       })
     });
   } catch (error) {

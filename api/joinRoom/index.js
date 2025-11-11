@@ -10,11 +10,18 @@ module.exports = async function (context, req) {
     return;
   }
 
-  // Add connection to SignalR group
+  // Add connection to SignalR group and notify existing members
   context.bindings.signalRGroupActions = [{
     groupName: roomId,
     action: 'add',
     connectionId: connectionId
+  }];
+
+  context.bindings.signalRMessages = [{
+    target: 'userJoined',
+    arguments: [{ connectionId }],
+    groupName: roomId,
+    userId: connectionId
   }];
 
   context.res = {
