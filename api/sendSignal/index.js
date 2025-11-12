@@ -10,12 +10,11 @@ module.exports = async function (context, req) {
     return;
   }
 
-  // Send message to SignalR group excluding the sender
+  // Send message to SignalR group
   context.bindings.signalRMessages = [{
     target: 'signal',
-    arguments: [{ type, signal }],
-    groupName: roomId,
-    userId: connectionId
+    arguments: [{ type, signal, connectionId }],
+    groupName: roomId
   }];
 
   context.res = {
